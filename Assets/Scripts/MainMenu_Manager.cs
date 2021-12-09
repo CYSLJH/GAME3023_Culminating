@@ -5,21 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu_Manager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Animator SceneTransition;
 
     public void onPlayPressed()
     {
-        SceneManager.LoadScene("Overworld");
+        StartCoroutine("LoadLevel");
     }
 
     public void onExitPressed()
@@ -28,5 +18,14 @@ public class MainMenu_Manager : MonoBehaviour
 
         //just to quit while in editor
         UnityEditor.EditorApplication.isPlaying = false;
+    }
+
+    IEnumerator LoadLevel()
+    {
+        SceneTransition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("Overworld");
+
     }
 }
