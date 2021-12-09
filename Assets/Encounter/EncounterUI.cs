@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class EncounterUI : MonoBehaviour
@@ -18,6 +19,29 @@ public class EncounterUI : MonoBehaviour
     GameObject abilityPanel;
 
     IEnumerator animateTextCoroutineRef = null;
+
+    public Slider hpSlider;
+
+    public Slider Mana;
+
+    public void SetHUD(EncounterUnit unit)
+    {
+        hpSlider.maxValue = unit.maxHP;
+        hpSlider.value = unit.currentHP;
+
+        Mana.maxValue = unit.maxMana;
+        Mana.value = unit.currentMana;
+    }
+
+    public void SetHP(int hp)
+    {
+        hpSlider.value = hp;
+    }
+
+    public void SetMana(int mana)
+    {
+        Mana.value = mana;
+    }
 
     // Start is called before the first frame update
     void Start()

@@ -479,10 +479,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 315390720}
+  - component: {fileID: 315390723}
   - component: {fileID: 315390722}
   - component: {fileID: 315390721}
   m_Layer: 5
-  m_Name: EnemyName (1)
+  m_Name: PlayerName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -498,9 +499,11 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 385417021}
+  - {fileID: 1213756640}
   m_Father: {fileID: 443653656}
-  m_RootOrder: 7
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -604,6 +607,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315390719}
   m_CullTransparentMesh: 1
+--- !u!114 &315390723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315390719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1105cacf3193940a6c118f019edfac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  encounter: {fileID: 0}
+  encounterText: {fileID: 0}
+  secondsPerCharacter: 0.1
+  abilityPanel: {fileID: 0}
+  hpSlider: {fileID: 385417022}
+  Mana: {fileID: 1213756641}
 --- !u!1 &385417020
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,18 +649,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385417020}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1731343428}
   - {fileID: 1119791625}
-  m_Father: {fileID: 443653656}
-  m_RootOrder: 3
+  m_Father: {fileID: 315390720}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 65.23, y: -1.0335}
+  m_AnchoredPosition: {x: -26.669998, y: -7.9335003}
   m_SizeDelta: {x: 69.541, y: 4.1532}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &385417022
@@ -862,10 +883,6 @@ RectTransform:
   m_Children:
   - {fileID: 2006150986}
   - {fileID: 1533914575}
-  - {fileID: 1213756640}
-  - {fileID: 385417021}
-  - {fileID: 1850653961}
-  - {fileID: 2081323206}
   - {fileID: 1696903314}
   - {fileID: 315390720}
   m_Father: {fileID: 0}
@@ -892,6 +909,8 @@ MonoBehaviour:
   encounterText: {fileID: 2045886158}
   secondsPerCharacter: 0.1
   abilityPanel: {fileID: 2006150985}
+  hpSlider: {fileID: 0}
+  Mana: {fileID: 0}
 --- !u!1 &474693446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1728,18 +1747,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213756639}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 430161632}
   - {fileID: 1521896581}
-  m_Father: {fileID: 443653656}
-  m_RootOrder: 2
+  m_Father: {fileID: 315390720}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 65.229, y: -5.1867}
+  m_AnchoredPosition: {x: -26.671005, y: -12.0867}
   m_SizeDelta: {x: 69.541, y: 4.1532}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1213756641
@@ -2282,6 +2301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1696903314}
+  - component: {fileID: 1696903317}
   - component: {fileID: 1696903316}
   - component: {fileID: 1696903315}
   m_Layer: 5
@@ -2301,9 +2321,11 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2081323206}
+  - {fileID: 1850653961}
   m_Father: {fileID: 443653656}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2407,6 +2429,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1696903313}
   m_CullTransparentMesh: 1
+--- !u!114 &1696903317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696903313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1105cacf3193940a6c118f019edfac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  encounter: {fileID: 0}
+  encounterText: {fileID: 0}
+  secondsPerCharacter: 0.1
+  abilityPanel: {fileID: 0}
+  hpSlider: {fileID: 2081323207}
+  Mana: {fileID: 1850653962}
 --- !u!1 &1701687108
 GameObject:
   m_ObjectHideFlags: 0
@@ -5612,18 +5652,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850653960}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1572661440}
   - {fileID: 1299953234}
-  m_Father: {fileID: 443653656}
-  m_RootOrder: 4
+  m_Father: {fileID: 1696903314}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.2, y: 27.8}
+  m_AnchoredPosition: {x: 12.100002, y: -12.467007}
   m_SizeDelta: {x: 69.541, y: 4.1532}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1850653962
@@ -6036,18 +6076,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2081323205}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224071888}
   - {fileID: 554939072}
-  m_Father: {fileID: 443653656}
-  m_RootOrder: 5
+  m_Father: {fileID: 1696903314}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.19899, y: 31.953196}
+  m_AnchoredPosition: {x: 12.101013, y: -8.313795}
   m_SizeDelta: {x: 69.541, y: 4.1532}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2081323207
@@ -6176,6 +6216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4707420575694945648}
   - component: {fileID: 4707420575694945651}
+  - component: {fileID: 4707420575694945663}
   - component: {fileID: 4707420575694945662}
   m_Layer: 0
   m_Name: Bob Bobski
@@ -6203,6 +6244,25 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7b38f4b1a4bf6584f8805a67d57f7eb3, type: 2}
   opponent: {fileID: 0}
   myEncounter: {fileID: 1754821062}
+--- !u!114 &4707420575694945663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4707420575694945661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 035837d94c0e6c24993762171a39f8e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitName: 
+  damage: 5
+  heal: 15
+  maxHP: 50
+  currentHP: 50
+  maxMana: 50
+  currentMana: 50
 --- !u!1 &7016805857090175748
 GameObject:
   m_ObjectHideFlags: 0
