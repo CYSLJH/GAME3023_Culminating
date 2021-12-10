@@ -46,7 +46,7 @@ public class EncounterUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animateTextCoroutineRef = AnimateTextCoroutine("You have encountered a: " + "Foo", secondsPerCharacter);
+        /*animateTextCoroutineRef = AnimateTextCoroutine("You have encountered a: " + "Foo", secondsPerCharacter);
 
         StartCoroutine(animateTextCoroutineRef);
 
@@ -55,7 +55,7 @@ public class EncounterUI : MonoBehaviour
         //on player turn begin enable ui
         encounter.onPlayerTurnBegin.AddListener(EnablePLayerUI);
         //on player turn end disable ui
-        encounter.onPlayerTurnEnd.AddListener(DisablePlayerUI);
+        encounter.onPlayerTurnEnd.AddListener(DisablePlayerUI);*/
     }
 
     void AnnounceCharacterTurnBegin(ICharacter characterTurn)

@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
+public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 public class EncounterInstance : MonoBehaviour
 {
-    [SerializeField]
-    EncounterPlayerCharacter player;
-    [SerializeField]
-    EncounterOpponentCharacter opponent;
+
+    public GameObject Player;
+    public GameObject Enemy;
+
+    public Text dialogueText;
 
     EncounterUnit PlayerUnit;
     EncounterUnit EnemyUnit;
@@ -17,11 +20,9 @@ public class EncounterInstance : MonoBehaviour
     public EncounterUI playerHUD;
     public EncounterUI enemyHUD;
 
-    public EncounterOpponentCharacter Opponent
-    {
-        get { return opponent; }
-        private set { opponent = value; }
-    }
+    public BattleState state;
+
+  
 
     public UnityEvent<ICharacter> onCharacterTurnBegin;
     public UnityEvent<ICharacter> onCharacterTurnEnd;
@@ -36,10 +37,34 @@ public class EncounterInstance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentCharacterTurn = player;
+        state = BattleState.START;
+        StartCoroutine(SetupBattle());
         playerHUD.SetHUD(PlayerUnit);
         enemyHUD.SetHUD(EnemyUnit);
-        onPlayerTurnBegin.Invoke(player);
+    }
+
+    IEnumerator SetupBattle()
+    {
+        GameObject playerGO = Instantiate(Player);
+        PlayerUnit = playerGO.GetComponent<EncounterUnit>();
+
+        GameObject enemyGO = Instantiate(Enemy);
+        EnemyUnit = enemyGO.GetComponent<EncounterUnit>();
+
+        dialogueText.text = EnemyUnit.unitName + " Challanges You!";
+
+        playerHUD.SetHUD(PlayerUnit);
+        enemyHUD.SetHUD(EnemyUnit);
+
+        yield return new WaitForSeconds(2f);
+
+        state = BattleState.PLAYERTURN;
+        PlayerTurn();
+    }
+
+    void PlayerTurn()
+    {
+        dialogueText.text = "What will you do?";
     }
 
     public void AdvanceTurns()
@@ -48,22 +73,6 @@ public class EncounterInstance : MonoBehaviour
 
         enemyHUD.SetHP(EnemyUnit.currentHP);
 
-        onCharacterTurnEnd.Invoke(currentCharacterTurn);
-
-        if(currentCharacterTurn == player)
-        {
-            onPlayerTurnEnd.Invoke(player);
-            currentCharacterTurn = opponent;
-        }
-        else
-        {
-            currentCharacterTurn = player;
-            onPlayerTurnBegin.Invoke(player);
-        }
-        turnNumber++;
-
-        onCharacterTurnBegin.Invoke(currentCharacterTurn);
-        currentCharacterTurn.TakeTurn(this);
     }
 
     public void UseAbility()
@@ -77,22 +86,6 @@ public class EncounterInstance : MonoBehaviour
         {
             playerHUD.SetMana(PlayerUnit.currentMana);
         }
-        onCharacterTurnEnd.Invoke(currentCharacterTurn);
-
-        if (currentCharacterTurn == player)
-        {
-            onPlayerTurnEnd.Invoke(player);
-            currentCharacterTurn = opponent;
-        }
-        else
-        {
-            currentCharacterTurn = player;
-            onPlayerTurnBegin.Invoke(player);
-        }
-        turnNumber++;
-
-        onCharacterTurnBegin.Invoke(currentCharacterTurn);
-        currentCharacterTurn.TakeTurn(this);
     }
 
     public void EndEncounter()
