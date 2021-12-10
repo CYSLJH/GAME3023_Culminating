@@ -193,7 +193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Use Ability
+  m_Text: Heal
 --- !u!222 &160743847
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -981,7 +981,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: (No Block)
 --- !u!222 &474693449
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1260,6 +1260,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 700968432}
+  - component: {fileID: 700968433}
   m_Layer: 0
   m_Name: OpponentSpot
   m_TagString: Untagged
@@ -1282,6 +1283,25 @@ Transform:
   m_Father: {fileID: 1754821063}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &700968433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700968431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 035837d94c0e6c24993762171a39f8e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitName: Foo
+  damage: 10
+  heal: 10
+  maxHP: 50
+  currentHP: 50
+  maxMana: 50
+  currentMana: 50
 --- !u!1 &737531676
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,7 +1372,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ADV.Turn
+  m_Text: Attack
 --- !u!222 &737531679
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6257,8 +6277,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: 
-  damage: 5
-  heal: 15
+  damage: 10
+  heal: 10
   maxHP: 50
   currentHP: 50
   maxMana: 50

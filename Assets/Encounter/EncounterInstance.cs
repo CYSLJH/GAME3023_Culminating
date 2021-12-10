@@ -11,6 +11,12 @@ public class EncounterInstance : MonoBehaviour
     [SerializeField]
     EncounterOpponentCharacter opponent;
 
+    EncounterUnit PlayerUnit;
+    EncounterUnit EnemyUnit;
+
+    public EncounterUI playerHUD;
+    public EncounterUI enemyHUD;
+
     public EncounterOpponentCharacter Opponent
     {
         get { return opponent; }
@@ -31,14 +37,49 @@ public class EncounterInstance : MonoBehaviour
     void Start()
     {
         currentCharacterTurn = player;
+        playerHUD.SetHUD(PlayerUnit);
+        enemyHUD.SetHUD(EnemyUnit);
         onPlayerTurnBegin.Invoke(player);
     }
 
     public void AdvanceTurns()
     {
+        bool isDead = EnemyUnit.TakeDamage(PlayerUnit.damage);
+
+        enemyHUD.SetHP(EnemyUnit.currentHP);
+
         onCharacterTurnEnd.Invoke(currentCharacterTurn);
 
         if(currentCharacterTurn == player)
+        {
+            onPlayerTurnEnd.Invoke(player);
+            currentCharacterTurn = opponent;
+        }
+        else
+        {
+            currentCharacterTurn = player;
+            onPlayerTurnBegin.Invoke(player);
+        }
+        turnNumber++;
+
+        onCharacterTurnBegin.Invoke(currentCharacterTurn);
+        currentCharacterTurn.TakeTurn(this);
+    }
+
+    public void UseAbility()
+    {
+        if (PlayerUnit.currentMana >= 0)
+        {
+            PlayerUnit.Heal(PlayerUnit.heal);
+            playerHUD.SetMana(PlayerUnit.currentMana);
+        }
+        else
+        {
+            playerHUD.SetMana(PlayerUnit.currentMana);
+        }
+        onCharacterTurnEnd.Invoke(currentCharacterTurn);
+
+        if (currentCharacterTurn == player)
         {
             onPlayerTurnEnd.Invoke(player);
             currentCharacterTurn = opponent;
