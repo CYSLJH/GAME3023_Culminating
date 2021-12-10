@@ -67,37 +67,111 @@ public class EncounterInstance : MonoBehaviour
         dialogueText.text = "What will you do?";
     }
 
-    public void AdvanceTurns()
+    IEnumerator AdvanceTurns()
     {
         bool isDead = EnemyUnit.TakeDamage(PlayerUnit.damage);
 
         enemyHUD.SetHP(EnemyUnit.currentHP);
+        dialogueText.text = "Successful Hit!";
+
+        yield return new WaitForSeconds(2f);
+
+        if (isDead)
+        {
+            state = BattleState.WON;
+            EndBattle();
+        }
+        else
+        {
+            state = BattleState.ENEMYTURN;
+            StartCoroutine(EnemyTurn());
+        }
 
     }
+    IEnumerator EnemyTurn()
+    {
+        dialogueText.text = "The enemy just stands there, menacingly...";
+        yield return new WaitForSeconds(2f);
 
-    public void UseAbility()
+        state = BattleState.PLAYERTURN;
+        PlayerTurn();
+    }
+    IEnumerator EndBattle()
+    {
+        if (state == BattleState.WON)
+        {
+            dialogueText.text = "You Won!";
+            yield return new WaitForSeconds(2f);
+            StartCoroutine("LoadLevel");
+        }
+        else if (state == BattleState.LOST)
+        {
+            dialogueText.text = "You Lost! Game Over!";
+            SceneManager.LoadScene("MenuScene");
+        }
+    }
+
+    public void onAttackButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+            return;
+
+        StartCoroutine(AdvanceTurns());
+    }
+
+    public void onBlockButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+            return;
+
+        StartCoroutine(PlayerBlock());
+    }
+
+    IEnumerator PlayerBlock()
+    {
+        dialogueText.text = "You Blocked! No Damage Taken!";
+
+        yield return new WaitForSeconds(2f);
+
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+    }
+
+
+    IEnumerator UseAbility()
     {
         if (PlayerUnit.currentMana >= 0)
         {
+            dialogueText.text = "You Healed!";
             PlayerUnit.Heal(PlayerUnit.heal);
             playerHUD.SetMana(PlayerUnit.currentMana);
         }
         else
         {
+            dialogueText.text = "Not Enough Mana!";
             playerHUD.SetMana(PlayerUnit.currentMana);
         }
+        yield return new WaitForSeconds(2f);
+
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+    }
+
+    public void onHealButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+            return;
+
+        StartCoroutine(UseAbility());
     }
 
     public void EndEncounter()
     {
-        //SceneManager.LoadScene("Overworld");
+        if (state != BattleState.PLAYERTURN)
+            return;
 
+        dialogueText.text = "You Fled The Battle!";
         FindObjectOfType<WorldTraveller>().ExitEncounter();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
